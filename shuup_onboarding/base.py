@@ -138,6 +138,14 @@ class OnboardingStep:
         """
         raise NotImplementedError()
 
+    def get_render_context(self) -> Dict:
+        """
+        Returns a context dictionary to access in the template.
+
+        To have access to this context, use `step_context` variable in the template.
+        """
+        return {}
+
     def save(self, form):
         """
         Save the data form the form as it is valid.

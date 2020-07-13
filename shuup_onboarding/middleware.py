@@ -10,6 +10,8 @@ from django.http.response import HttpResponseRedirect
 from django.utils.deprecation import MiddlewareMixin
 from shuup.admin.shop_provider import get_shop
 from shuup.admin.supplier_provider import get_supplier
+from shuup.apps.provides import get_identifier_to_object_map
+from django.conf import settings
 
 from shuup_onboarding.onboard import get_onboarding_provider, OnboardingContext
 from shuup_onboarding.storage import OnboardingSessionStorage
@@ -57,6 +59,10 @@ class BaseAdminOnboardingMiddleware(MiddlewareMixin):
 
         # ignore this view
         if request.resolver_match.view_name in self.allowed_views:
+            return
+
+        # ignore this view too
+        if request.resolver_match.view_name in settings.SHUUP_ONBOARDING_MIDDLEWARE_IGNORE_VIEWS:
             return
 
         storage = OnboardingSessionStorage(self.onboarding_process_id, request.session)

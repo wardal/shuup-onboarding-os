@@ -35,6 +35,7 @@
             <form method="post" id="onboarding-form">
                 {% csrf_token %}
                 <div class="step-content">
+                    {% set step_context = step.get_render_context() %}
                     {% include step.template_name with context %}
                 </div>
 
@@ -97,4 +98,5 @@
             submitField('skip', true);
         });
     </script>
+
 {% endblock %}
