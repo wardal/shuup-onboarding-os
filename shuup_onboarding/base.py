@@ -82,6 +82,7 @@ class OnboardingStep:
     priority = 0            # type: int
     context = None          # type: AbstractOnboardingContext
     template_name = ""      # type: str
+    js_template_name = ""   # type: str
 
     def __init__(self, context: AbstractOnboardingContext):
         self.context = context
